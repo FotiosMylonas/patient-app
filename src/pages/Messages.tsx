@@ -118,7 +118,7 @@ export default function Messages() {
             onKeyDown={handleKeyDown}
             placeholder="Type a message..."
             rows={1}
-            className="flex-1 bg-bg-secondary border border-border rounded-button px-3 py-2 text-sm resize-none focus:outline-none focus:border-accent transition-colors max-h-32"
+            className="flex-1 bg-bg-secondary border border-border rounded-button px-3 py-2 text-base resize-none focus:outline-none focus:border-accent transition-colors max-h-32"
           />
           <button
             onClick={handleSend}
