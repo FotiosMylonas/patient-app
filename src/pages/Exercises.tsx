@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "../services/api";
-import type { Exercise } from "../services/types";
+import type { Exercise, TreatmentTrajectory } from "../services/types";
 import ExerciseCard from "../components/ExerciseCard";
 import TrajectoryCard from "../components/TrajectoryCard";
 
@@ -9,7 +9,7 @@ import TrajectoryCard from "../components/TrajectoryCard";
 export default function Exercises() {
   const [exercises,setExercises] = useState<Exercise[]>([]);
   const [loading, setLoading] = useState(true);
-    const [trajectory, setTrajectory] = useState<TreatmentTrajectory | null>(null);
+    const [trajectory, setTrajectory] = useState< TreatmentTrajectory | null>(null);
 
 
    useEffect(() => {
