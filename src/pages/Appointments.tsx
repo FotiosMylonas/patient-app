@@ -1,18 +1,26 @@
 import { useEffect, useState } from "react";
 import { api } from "../services/api";
-import type { Appointment } from "../services/types";
+import type { Appointment, TreatmentTrajectory } from "../services/types";
 import AppointmentCard from "../components/AppointmentCard";
+import TrajectoryCard from "../components/TrajectoryCard";
+
 
 export default function Appointments() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
   const [showHistory, setShowHistory] = useState(false);
+  const [trajectory, setTrajectory] = useState<TreatmentTrajectory | null>(null);
+
 
   useEffect(() => {
     async function loadData() {
       try {
-        const data = await api.getAppointments();
-        setAppointments(data);
+        const [appts, traj] = await Promise.all([
+          api.getAppointments(),
+          api.getActiveTrajectory(),
+        ]);
+        setAppointments(appts);
+        setTrajectory(traj);
       } catch (error) {
         console.error("Failed to load appointments:", error);
       } finally {
@@ -44,7 +52,7 @@ export default function Appointments() {
 
   return (
     <div className="p-6 space-y-6">
-      {/* Page header */}
+      
       <header>
         <h1 className="text-3xl font-bold tracking-tight">Appointments</h1>
         <p className="text-text-secondary mt-1">
@@ -53,6 +61,9 @@ export default function Appointments() {
             : "Nothing scheduled"}
         </p>
       </header>
+
+      {/* Trajectory context */}
+      {trajectory && <TrajectoryCard trajectory={trajectory} variant="compact" />}
 
       {/* Upcoming section */}
       <section>
@@ -81,7 +92,7 @@ export default function Appointments() {
         )}
       </section>
 
-      {/* Past section — collapsed by default */}
+      {/* history */}
       {past.length > 0 && (
         <section>
           <button

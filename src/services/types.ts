@@ -27,6 +27,7 @@ export interface Appointment {
     location: string;
     status: AppointmentStatus;
     notes?: string;
+    trajectoryId?: string; // which traj this belogs to
 }
 
 export type AppointmentStatus =
@@ -65,3 +66,50 @@ export interface Conversation {
     lastMessageAt: string;
     unreadCount: number;
 }
+
+export interface TreatmentTrajectory {
+    id: string;
+    diagnosis: string; //ex. Lower back pain
+    treatmentPlan: string; //ex manual therapy
+    startDate: string;          // ISO
+    estimatedSessions: number;
+    completedSessions: number;
+    primaryPractitioner: Practitioner;
+    status: "active" | "completed" | "paused";
+    goal: string;
+}
+
+export interface PSKActivity {
+    id: string;
+    label: string; // ex sit to stand 
+
+}
+
+export interface PSKEntry {
+    date: string;
+    scores: Record<string, number>;
+
+
+}
+
+export type QuestionnaireCode = "PSK" | "NPRS" | "GPE";
+export type questionnaireStatus = "pending" | "completed";
+
+export interface Questionnaire {
+    id: string;
+    code: QuestionnaireCode;
+    name: string;
+    description: string;
+    trajectoryId?: string;
+    assignedBy: string;
+    assignedAt: string;
+    dueDate: string;
+    status: questionnaireStatus;
+    completedAt: string;
+    result?: QuestionnaireResult;
+}
+
+export type QuestionnaireResult =
+    | { code: "PSK"; scores: Record<string, number>; average: number }
+    | { code: "NPRS"; painNow: number; painWorst: number; label: string }
+    | { code: "GPE"; rating: number; label: string };

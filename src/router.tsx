@@ -7,9 +7,13 @@ import Messages from "./pages/Messages";
 import Profile from "./pages/Profile";
 import AppLayout from "./components/AppLayout";
 import AppointmentDetail from "./pages/AppointmentDetail";
+import  QuestionnaireDetail from "./pages/QuestionnaireDetail";
+import Questionnaires from "./pages/Questionnaires";
+
+
 
 export const router = createBrowserRouter([
-  {
+  { 
     path: "/",
     element: <Navigate to="/Login" replace />,
   },
@@ -23,7 +27,8 @@ export const router = createBrowserRouter([
       { path: "/today", element: <Today /> },
       { path: "/appointments", element: <Appointments /> },
       { path: "/exercises", element: <Exercises /> },
-      { path: "/messages", element: <Messages /> },
+      { path: "/questionnaires", element: <Questionnaires /> },
+      { path: "/questionnaires/:id", element: <QuestionnaireDetail /> },
       { path: "/profile", element: <Profile /> },
       {path : "/appointments/:id", element: <AppointmentDetail/>}
     ],

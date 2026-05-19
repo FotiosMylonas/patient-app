@@ -20,7 +20,8 @@ export const appointments: Appointment[] = [
         treatmentCode: "CO",
         location: "Clinic Amsterdam Centrum",
         status: "scheduled",
-        notes: "Focus on lower back mobility",
+        notes: "Focus on Lower back mobility",
+        trajectoryId: "traj_001"
     },
     {
         id: "appt_002",
@@ -32,6 +33,8 @@ export const appointments: Appointment[] = [
         treatmentCode: "CO",
         location: "Clinic Amsterdam Centrum",
         status: "scheduled",
+        trajectoryId: "traj_001"
+
     },
     {
         id: "appt_003",
@@ -43,6 +46,8 @@ export const appointments: Appointment[] = [
         treatmentCode: "CO",
         location: "Clinic Amsterdam Centrum",
         status: "scheduled",
+        trajectoryId: "traj_001"
+
     },
     {
         id: "appt_004",
@@ -55,6 +60,8 @@ export const appointments: Appointment[] = [
         location: "Clinic Amsterdam Centrum",
         status: "scheduled",
         notes: "Final evaluation — bring questionnaires",
+        trajectoryId: "traj_001"
+
     },
 
     // Past 
@@ -68,6 +75,8 @@ export const appointments: Appointment[] = [
         treatmentCode: "CO",
         location: "Clinic Amsterdam Centrum",
         status: "completed",
+        trajectoryId: "traj_001"
+
     },
     {
         id: "appt_006",
@@ -79,5 +88,7 @@ export const appointments: Appointment[] = [
         treatmentCode: "NP",
         location: "Clinic Amsterdam Centrum",
         status: "completed",
+        trajectoryId: "traj_001"
+
     },
 ];

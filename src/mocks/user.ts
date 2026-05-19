@@ -6,6 +6,6 @@ export const currentUser: Patient = {
     email: "fff@gmail.com",
     birthdate: "1989-07-12",
     phone: "+31....",
-    insurer: "i will add insurance company",
+    insurer: "i would add insurance company",
     avatarUrl: undefined,
 };

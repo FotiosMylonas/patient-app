@@ -1,27 +1,34 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../services/api";
-import type { Patient, Appointment, Exercise } from "../services/types";
+import type { Patient, Appointment, Exercise, TreatmentTrajectory } from "../services/types";
 import { getGreeting } from "../services/utils";
 import AppointmentCard from "../components/AppointmentCard";
+import TrajectoryCard from "../components/TrajectoryCard";
+import PSKCard from "../components/PSKCard";
+import { DumbbellIcon } from "../components/TabBar";
 
 export default function Today() {
   const [patient, setPatient] = useState<Patient | null>(null);
   const [nextAppointment, setNextAppointment] = useState<Appointment | null>(null);
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const [trajectory, setTrajectory] = useState<TreatmentTrajectory | null>(null);
+  
+ 
   useEffect(() => {
     async function loadData() {
       try {
-        const [patientData, allAppointments, exerciseData] = await Promise.all([
+        const [patientData, allAppointments, exerciseData,trajectoryData] = await Promise.all([
           api.getCurrentPatient(),
           api.getAppointments(),
           api.getExercises(),
+          api.getActiveTrajectory(),
         ]);
 
         setPatient(patientData);
         setExercises(exerciseData);
+        setTrajectory(trajectoryData) ;
 
         // Find next scheduled appointment
         const upcoming = allAppointments.find((a) => a.status === "scheduled");
@@ -48,6 +55,8 @@ export default function Today() {
   const firstName = patient?.name.split(" ")[0] ?? "";
   const completedToday = exercises.filter((ex) => ex.completedToday).length;
   const totalToday = exercises.length;
+  const todayIso = new Date().toISOString().split("T")[0]; 
+
 
   return (
     <div className="p-6 space-y-6">
@@ -60,6 +69,20 @@ export default function Today() {
           Here's what's on your plate today.
         </p>
       </header>
+
+      {/* Treatment trajectory */}
+      {trajectory && (
+        <section>
+          <TrajectoryCard trajectory={trajectory} />
+        </section>
+      )}
+
+      {/* PSK quick check-in */}
+         {trajectory && (
+         <section>
+               <PSKCard todayIso={todayIso} />
+          </section>
+      )}
 
       {/* Next appointment */}
       <section>
@@ -102,7 +125,7 @@ export default function Today() {
               <p className="text-text-secondary text-sm">Exercises completed</p>
             </div>
             <div className="text-3xl">
-              {completedToday === totalToday ? "🎉" : "💪"}
+              {completedToday === totalToday ? "🎉" : <DumbbellIcon/>}
             </div>
           </div>
 
