@@ -12,6 +12,7 @@ export const exercises: Exercise[] = [
         completedToday: false,
         weeklyTarget: 5,
         weeklyCompleted: 3,
+        trajectoryId: "traj_001",
     },
     {
         id: "ex_002",
@@ -24,6 +25,7 @@ export const exercises: Exercise[] = [
         completedToday: true,
         weeklyTarget: 7,
         weeklyCompleted: 5,
+        trajectoryId: "traj_001",
     },
     {
         id: "ex_003",
@@ -36,6 +38,7 @@ export const exercises: Exercise[] = [
         completedToday: false,
         weeklyTarget: 5,
         weeklyCompleted: 2,
+        trajectoryId: "traj_001",
     },
     {
         id: "ex_004",
@@ -48,5 +51,6 @@ export const exercises: Exercise[] = [
         completedToday: false,
         weeklyTarget: 4,
         weeklyCompleted: 2,
+        trajectoryId: "traj_001",
     },
 ];

@@ -2,17 +2,25 @@ import { useEffect, useState } from "react";
 import { api } from "../services/api";
 import type { Exercise } from "../services/types";
 import ExerciseCard from "../components/ExerciseCard";
+import TrajectoryCard from "../components/TrajectoryCard";
+
 
 
 export default function Exercises() {
   const [exercises,setExercises] = useState<Exercise[]>([]);
   const [loading, setLoading] = useState(true);
+    const [trajectory, setTrajectory] = useState<TreatmentTrajectory | null>(null);
+
 
    useEffect(() => {
     async function loadData() {
       try {
-        const data = await api.getExercises();
-        setExercises(data);
+        const [exerciseData, trajectoryData] = await Promise.all([
+          api.getExercises(),
+          api.getActiveTrajectory(),
+        ]);
+        setExercises(exerciseData);
+        setTrajectory(trajectoryData);
       } catch (error) {
         console.error("Failed to load exercises:", error);
       } finally {
@@ -93,6 +101,9 @@ export default function Exercises() {
         </div>
 
       </header>
+
+      {/* Trajectory context */}
+      {trajectory && <TrajectoryCard trajectory={trajectory} variant="compact" />}
 
       {/* when pending */}
       {pending.length > 0 && (

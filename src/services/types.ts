@@ -49,6 +49,7 @@ export interface Exercise {
     completedToday: boolean;
     weeklyTarget: number;  //times a week
     weeklyCompleted: number;
+    trajectoryId?: string;
 }
 
 export interface Message {
