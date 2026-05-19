@@ -3,7 +3,6 @@ import Login from "./pages/Login";
 import Today from "./pages/Today";
 import Appointments from "./pages/Appointments";
 import Exercises from "./pages/Exercises";
-import Messages from "./pages/Messages";
 import Profile from "./pages/Profile";
 import AppLayout from "./components/AppLayout";
 import AppointmentDetail from "./pages/AppointmentDetail";

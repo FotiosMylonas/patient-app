@@ -12,7 +12,6 @@ import type {
     PSKEntry,
     Questionnaire,
     QuestionnaireResult,
-    questionnaireStatus
 } from "./types";
 import { trajectories, PSKActivities } from "../mocks/trajectories";
 import { questionnaires } from "../mocks/questionnaires";
